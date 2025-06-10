@@ -2,6 +2,7 @@ from collections import Counter
 import os
 
 def load_dictionary():
+    # Путь к файлу nouns.txt 
     file_path = os.path.join(os.path.dirname(__file__), "nouns.txt")
     with open(file_path, encoding='utf-8') as f:
         words = [line.strip() for line in f if line.strip()]
@@ -17,16 +18,25 @@ def find_anagrams(input_word, words_list):
     return valid_words
 
 def main():
-
+    # Загрузка словаря
     dictionary = load_dictionary()
 
-    query = input("Введите слово: ").strip().lower()
+    while True:
+        # Ввод от пользователя
+        query = input("Введите слово ").strip().lower()
+        if query in ('выход', 'exit', ''):
+            print("Выход из программы.")
+            break
 
-    anagrams = find_anagrams(query, dictionary)
+        # Поиск подходящих слов
+        anagrams = find_anagrams(query, dictionary)
 
-    print("\nНайденные слова:")
-    for word in anagrams:
-        print(word)
+        # Вывод результатов
+        print("\nНайденные слова:")
+        for word in anagrams:
+            print(word)
+        print()
 
 if __name__ == "__main__":
     main()
+
